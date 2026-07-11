@@ -13,9 +13,8 @@
     hiHatTop.style.top = "171px";
   };
 
-  const playSound = (e) => {
-    const keyCode = e.keyCode,
-      keyElement = document.querySelector(`div[data-key="${keyCode}"]`);
+  const playSound = (keyCode) => {
+    const keyElement = document.querySelector(`div[data-key="${keyCode}"]`);
 
     if (!keyElement) return;
 
@@ -58,10 +57,12 @@
 
   drumKeys.forEach((key) => {
     key.addEventListener("transitionend", removeKeyTransition);
+    // Mouse click and touch tap both fire "click", routing through the same path as keydown.
+    key.addEventListener("click", () => playSound(Number(key.dataset.key)));
   });
 
   crashRide.addEventListener("transitionend", removeCrashRideTransition);
   hiHatTop.addEventListener("transitionend", removeHiHatTopTransition);
 
-  window.addEventListener("keydown", playSound);
+  window.addEventListener("keydown", (e) => playSound(e.keyCode));
 }

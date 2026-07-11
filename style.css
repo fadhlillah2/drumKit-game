@@ -164,6 +164,28 @@ body {
 	vertical-align: middle;
 }
 
+/* Narrow screens: the drum image + its absolutely-positioned keys are a fixed
+   600px unit, so scale the whole unit down (keys stay aligned) and stack the
+   key-map above it. overflow-x:hidden clips the scaled box's reserved width. */
+@media (max-width: 700px) {
+	html, body { overflow-x: hidden; }
+	.main-wrapper { width: 100%; margin-top: 10px; }
+	.main-title { font-size: 2.2em; margin: 10px 0 0; }
+	.key-map-wrapper {
+		position: static;
+		width: 100%;
+		height: auto;
+		padding: 15px 0;
+	}
+	.key-map-list { display: inline-block; text-align: left; margin: 0 auto; }
+	.drum-kit-wrapper {
+		transform: scale(0.56);
+		transform-origin: top center;
+		margin: 0 auto;
+		height: 300px;
+	}
+}
+
 
 
 
